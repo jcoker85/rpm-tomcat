@@ -2,11 +2,12 @@
 #
 # sudo yum -y install rpmdevtools && rpmdev-setuptree
 #
-# wget -P ~/rpmbuild/SPECS https://raw.github.com/inab/rpm-tomcat7/7.0.69/tomcat7.spec
-# wget -P ~/rpmbuild/SOURCES https://raw.github.com/inab/rpm-tomcat7/7.0.69/tomcat7.init
-# wget -P ~/rpmbuild/SOURCES https://raw.github.com/inab/rpm-tomcat7/7.0.69/tomcat7.sysconfig
-# wget -P ~/rpmbuild/SOURCES https://raw.github.com/inab/rpm-tomcat7/7.0.69/tomcat7.logrotate
-# wget -P ~/rpmbuild/SOURCES https://archive.apache.org/dist/tomcat/tomcat-7/v7.0.69/bin/apache-tomcat-7.0.69.tar.gz
+# wget -P ~/rpmbuild/SOURCES https://archive.apache.org/dist/tomcat/tomcat-7/v7.0.73/bin/apache-tomcat-7.0.73.tar.gz
+#
+# wget https://github.com/inab/rpm-tomcat7/archive/7.0.73.tar.gz
+# tar xf 7.0.73.tar.gz
+# cp -p rpm-tomcat7-7.0.73/tomcat7.spec ~/rpmbuild/SPECS
+# cp -p rpm-tomcat7-7.0.73/{tomcat7.init,tomcat7.sysconfig,tomcat7.logrotate} ~/rpmbuild/SOURCES
 # rpmbuild -bb ~/rpmbuild/SPECS/tomcat7.spec
 
 %define __jar_repack %{nil}
@@ -16,7 +17,7 @@
 
 Summary:    Apache Servlet/JSP Engine, RI for Servlet 2.4/JSP 2.0 API
 Name:       tomcat7
-Version:    7.0.69
+Version:    7.0.73
 BuildArch:  noarch
 Release:    1
 License:    Apache Software License
@@ -216,6 +217,8 @@ if [ $1 -ge 1 ]; then
 fi
 
 %changelog
+* Wed Dec 14 2016 José María Fernández <jmfernandez@cnio.es>
+- 7.0.73
 * Wed Jun 8 2016 José María Fernández <jmfernandez@cnio.es>
 - 7.0.69
 * Wed Apr 7 2016 José María Fernández <jmfernandez@cnio.es>
