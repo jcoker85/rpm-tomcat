@@ -2,12 +2,12 @@
 #
 # sudo yum -y install rpmdevtools && rpmdev-setuptree
 #
-# wget -P ~/rpmbuild/SOURCES https://archive.apache.org/dist/tomcat/tomcat-7/v7.0.75/bin/apache-tomcat-7.0.75.tar.gz
+# wget -P ~/rpmbuild/SOURCES https://archive.apache.org/dist/tomcat/tomcat-7/v7.0.81/bin/apache-tomcat-7.0.81.tar.gz
 #
-# wget https://github.com/inab/rpm-tomcat7/archive/7.0.75.tar.gz
-# tar xf 7.0.75.tar.gz
-# cp -p rpm-tomcat7-7.0.75/tomcat7.spec ~/rpmbuild/SPECS
-# cp -p rpm-tomcat7-7.0.75/{tomcat7.init,tomcat7.sysconfig,tomcat7.logrotate} ~/rpmbuild/SOURCES
+# wget https://github.com/inab/rpm-tomcat7/archive/7.0.81.tar.gz
+# tar xf 7.0.81.tar.gz
+# cp -p rpm-tomcat7-7.0.81/tomcat7.spec ~/rpmbuild/SPECS
+# cp -p rpm-tomcat7-7.0.81/{tomcat7.init,tomcat7.sysconfig,tomcat7.logrotate} ~/rpmbuild/SOURCES
 # rpmbuild -bb ~/rpmbuild/SPECS/tomcat7.spec
 
 %define __jar_repack %{nil}
@@ -17,7 +17,7 @@
 
 Summary:    Apache Servlet/JSP Engine, RI for Servlet 2.4/JSP 2.0 API
 Name:       tomcat7
-Version:    7.0.75
+Version:    7.0.81
 BuildArch:  noarch
 Release:    1
 License:    Apache Software License
@@ -217,6 +217,8 @@ if [ $1 -ge 1 ]; then
 fi
 
 %changelog
+* Fri Sep 15 2017 José María Fernández <jose.m.fernandez@bsc.es>
+- 7.0.81
 * Tue Feb 21 2017 José María Fernández <jmfernandez@cnio.es>
 - 7.0.75
 * Wed Dec 14 2016 José María Fernández <jmfernandez@cnio.es>
