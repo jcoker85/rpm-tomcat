@@ -2,22 +2,22 @@
 #
 # sudo yum -y install rpmdevtools && rpmdev-setuptree
 #
-# wget -P ~/rpmbuild/SOURCES https://archive.apache.org/dist/tomcat/tomcat-7/v7.0.75/bin/apache-tomcat-7.0.75.tar.gz
+# wget -P ~/rpmbuild/SOURCES https://archive.apache.org/dist/tomcat/tomcat-8/v8.5.23/bin/apache-tomcat-8.5.23.tar.gz
 #
-# wget https://github.com/inab/rpm-tomcat7/archive/7.0.75.tar.gz
-# tar xf 7.0.75.tar.gz
-# cp -p rpm-tomcat7-7.0.75/tomcat7.spec ~/rpmbuild/SPECS
-# cp -p rpm-tomcat7-7.0.75/{tomcat7.init,tomcat7.sysconfig,tomcat7.logrotate} ~/rpmbuild/SOURCES
-# rpmbuild -bb ~/rpmbuild/SPECS/tomcat7.spec
+# wget https://github.com/inab/rpm-tomcat/archive/8.5.23.tar.gz
+# tar xf 8.5.23.tar.gz
+# cp -p rpm-tomcat-8.5.23/tomcat8.spec ~/rpmbuild/SPECS
+# cp -p rpm-tomcat-8.5.23/tomcat8.{init,sysconfig,logrotate} ~/rpmbuild/SOURCES
+# rpmbuild -bb ~/rpmbuild/SPECS/tomcat8.spec
 
 %define __jar_repack %{nil}
-%define tomcat_home /usr/share/tomcat7
+%define tomcat_home /usr/share/tomcat8
 %define tomcat_group tomcat
 %define tomcat_user tomcat
 
-Summary:    Apache Servlet/JSP Engine, RI for Servlet 2.4/JSP 2.0 API
-Name:       tomcat7
-Version:    7.0.75
+Summary:    Apache Servlet/JSP Engine, RI for Servlet 3.1/JSP 2.3 API
+Name:       tomcat8
+Version:    8.5.23
 BuildArch:  noarch
 Release:    1
 License:    Apache Software License
@@ -42,7 +42,7 @@ a collaboration of the best-of-breed developers from around the world.
 We invite you to participate in this open development project. To
 learn more about getting involved, click here.
 
-This package contains the base tomcat installation that depends on Sun's JDK and not
+This package contains the base tomcat installation that depends on Oracle's JDK and not
 on JPP packages.
 
 %package lib
@@ -217,6 +217,8 @@ if [ $1 -ge 1 ]; then
 fi
 
 %changelog
+* Mon Oct 30 2017 José María Fernández <jose.m.fernandez@bsc.es>
+- 8.5.23
 * Tue Feb 21 2017 José María Fernández <jmfernandez@cnio.es>
 - 7.0.75
 * Wed Dec 14 2016 José María Fernández <jmfernandez@cnio.es>
