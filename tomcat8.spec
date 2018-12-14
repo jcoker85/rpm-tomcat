@@ -2,12 +2,12 @@
 #
 # sudo yum -y install rpmdevtools && rpmdev-setuptree
 #
-# wget -P ~/rpmbuild/SOURCES https://archive.apache.org/dist/tomcat/tomcat-8/v8.5.23/bin/apache-tomcat-8.5.23.tar.gz
+# wget -P ~/rpmbuild/SOURCES https://archive.apache.org/dist/tomcat/tomcat-8/v8.5.35/bin/apache-tomcat-8.5.35.tar.gz
 #
-# wget https://github.com/inab/rpm-tomcat/archive/8.5.23.tar.gz
-# tar xf 8.5.23.tar.gz
-# cp -p rpm-tomcat-8.5.23/tomcat8.spec ~/rpmbuild/SPECS
-# cp -p rpm-tomcat-8.5.23/tomcat8.{init,sysconfig,logrotate} ~/rpmbuild/SOURCES
+# wget https://github.com/inab/rpm-tomcat/archive/8.5.35.tar.gz
+# tar xf 8.5.35.tar.gz
+# cp -p rpm-tomcat-8.5.35/tomcat8.spec ~/rpmbuild/SPECS
+# cp -p rpm-tomcat-8.5.35/tomcat8.{init,sysconfig,logrotate} ~/rpmbuild/SOURCES
 # rpmbuild -bb ~/rpmbuild/SPECS/tomcat8.spec
 
 %define __jar_repack %{nil}
@@ -17,7 +17,7 @@
 
 Summary:    Apache Servlet/JSP Engine, RI for Servlet 3.1/JSP 2.3 API
 Name:       tomcat8
-Version:    8.5.23
+Version:    8.5.35
 BuildArch:  noarch
 Release:    1
 License:    Apache Software License
@@ -217,6 +217,8 @@ if [ $1 -ge 1 ]; then
 fi
 
 %changelog
+* Fri Dec 14 2018 José María Fernández <jose.m.fernandez@bsc.es>
+- 8.5.35
 * Mon Oct 30 2017 José María Fernández <jose.m.fernandez@bsc.es>
 - 8.5.23
 * Tue Feb 21 2017 José María Fernández <jmfernandez@cnio.es>
