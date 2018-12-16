@@ -5,7 +5,9 @@
 # description:  Start/stop script for Tomcat8
 
 # Source function library.
-. /etc/rc.d/init.d/functions
+for func in /etc/rc.d/init.d/functions /etc/init.d/functions /lib/lsb/init-functions ; do
+	[ -f "$func" ] && . "$func" && break
+done
 
 [ -f /etc/sysconfig/network ] && . /etc/sysconfig/network
 [ "${NETWORKING}" = "no" ] && exit 0
