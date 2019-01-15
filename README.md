@@ -8,12 +8,12 @@ Steps to build them:
 ```bash
 sudo yum -y install rpmdevtools && rpmdev-setuptree
 
-wget -P ~/rpmbuild/SOURCES https://archive.apache.org/dist/tomcat/tomcat-8/v8.5.35/bin/apache-tomcat-8.5.35.tar.gz
+wget -P ~/rpmbuild/SOURCES https://archive.apache.org/dist/tomcat/tomcat-8/v8.5.37/bin/apache-tomcat-8.5.37.tar.gz
 
-wget https://github.com/inab/rpm-tomcat/archive/8.5.35.tar.gz
-tar xf 8.5.35.tar.gz
-cp -p rpm-tomcat-8.5.35/tomcat8.spec ~/rpmbuild/SPECS
-cp -p rpm-tomcat-8.5.35/tomcat8.{init,sysconfig,logrotate} ~/rpmbuild/SOURCES
+wget https://github.com/inab/rpm-tomcat/archive/8.5.37.tar.gz
+tar xf 8.5.37.tar.gz
+cp -p rpm-tomcat-8.5.37/tomcat8.spec ~/rpmbuild/SPECS
+cp -p rpm-tomcat-8.5.37/tomcat8.{init,sysconfig,logrotate} ~/rpmbuild/SOURCES
 rpmbuild -bb ~/rpmbuild/SPECS/tomcat8.spec
 ```
 
