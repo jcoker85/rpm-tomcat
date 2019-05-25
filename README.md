@@ -6,15 +6,12 @@ An RPM spec file to build Tomcat 8.5 RPMs.
 Steps to build them:
 
 ```bash
-sudo yum -y install rpmdevtools && rpmdev-setuptree
+sudo yum -y install rpmdevtools git
 
-wget -P ~/rpmbuild/SOURCES https://archive.apache.org/dist/tomcat/tomcat-8/v8.5.37/bin/apache-tomcat-8.5.37.tar.gz
+git clone -b tomcat8 https://github.com/inab/rpm-tomcat.git
 
-wget https://github.com/inab/rpm-tomcat/archive/8.5.37.tar.gz
-tar xf 8.5.37.tar.gz
-cp -p rpm-tomcat-8.5.37/tomcat8.spec ~/rpmbuild/SPECS
-cp -p rpm-tomcat-8.5.37/tomcat8.{init,sysconfig,logrotate} ~/rpmbuild/SOURCES
-rpmbuild -bb ~/rpmbuild/SPECS/tomcat8.spec
+cd rpm-tomcat
+./rpm-generator.sh
 ```
 
 then you can install the RPMs available at ~/rpmbuild/RPMS/noarch using either `yum` or `rpm`
