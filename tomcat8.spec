@@ -2,12 +2,12 @@
 #
 # sudo yum -y install rpmdevtools && rpmdev-setuptree
 #
-# wget -P ~/rpmbuild/SOURCES https://archive.apache.org/dist/tomcat/tomcat-8/v8.5.41/bin/apache-tomcat-8.5.41.tar.gz
+# wget -P ~/rpmbuild/SOURCES https://archive.apache.org/dist/tomcat/tomcat-8/v8.5.42/bin/apache-tomcat-8.5.42.tar.gz
 #
-# wget https://github.com/inab/rpm-tomcat/archive/8.5.41.tar.gz
-# tar xf 8.5.41.tar.gz
-# cp -p rpm-tomcat-8.5.41/tomcat8.spec ~/rpmbuild/SPECS
-# cp -p rpm-tomcat-8.5.41/tomcat8.{init,sysconfig,logrotate} ~/rpmbuild/SOURCES
+# wget https://github.com/inab/rpm-tomcat/archive/8.5.42.tar.gz
+# tar xf 8.5.42.tar.gz
+# cp -p rpm-tomcat-8.5.42/tomcat8.spec ~/rpmbuild/SPECS
+# cp -p rpm-tomcat-8.5.42/tomcat8.{init,sysconfig,logrotate} ~/rpmbuild/SOURCES
 # rpmbuild -bb ~/rpmbuild/SPECS/tomcat8.spec
 
 %define __jar_repack %{nil}
@@ -17,7 +17,7 @@
 
 Summary:    Apache Servlet/JSP Engine, RI for Servlet 3.1/JSP 2.3 API
 Name:       tomcat8
-Version:    8.5.41
+Version:    8.5.42
 BuildArch:  noarch
 Release:    1
 License:    Apache Software License
@@ -217,6 +217,8 @@ if [ $1 -ge 1 ]; then
 fi
 
 %changelog
+* Tue Jun 25 2019 José María Fernández <jose.m.fernandez@bsc.es>
+- 8.5.42
 * Sat May 25 2019 José María Fernández <jose.m.fernandez@bsc.es>
 - 8.5.41 (which fixes a deaadlock https://bz.apache.org/bugzilla/show_bug.cgi?id=63251)
 * Tue Jan 15 2019 José María Fernández <jose.m.fernandez@bsc.es>
