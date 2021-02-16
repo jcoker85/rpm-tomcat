@@ -11,13 +11,13 @@
 # rpmbuild -bb ~/rpmbuild/SPECS/tomcat8.spec
 
 %define __jar_repack %{nil}
-%define tomcat_home /usr/share/tomcat8
+%define tomcat_home /usr/share/tomcat
 %define tomcat_group tomcat
 %define tomcat_user tomcat
 
 Summary:    Apache Servlet/JSP Engine, RI for Servlet 3.1/JSP 2.3 API
 Name:       tomcat8
-Version:    8.5.42
+Version:    8.5.63
 BuildArch:  noarch
 Release:    1
 License:    Apache Software License
@@ -94,70 +94,9 @@ The ROOT web application for Apache Tomcat.
 install -d -m 755 %{buildroot}/%{tomcat_home}/
 cp -R * %{buildroot}/%{tomcat_home}/
 
-# Put logging in /var/log and link back.
-rm -rf %{buildroot}/%{tomcat_home}/logs
-install -d -m 755 %{buildroot}/var/log/%{name}/
-cd %{buildroot}/%{tomcat_home}/
-ln -s /var/log/%{name}/ logs
-cd -
-
-# Put temp in /var/cache and link back.
-rm -rf %{buildroot}/%{tomcat_home}/temp
-install -d -m 755 %{buildroot}/var/cache/%{name}/temp
-cd %{buildroot}/%{tomcat_home}/
-ln -s /var/cache/%{name}/temp temp
-cd -
-
-# Put work in /var/cache and link back.
-rm -rf %{buildroot}/%{tomcat_home}/work
-install -d -m 755 %{buildroot}/var/cache/%{name}/work
-cd %{buildroot}/%{tomcat_home}/
-ln -s /var/cache/%{name}/work work
-cd -
-
-# Put conf in /etc/ and link back.
-install -d -m 755 %{buildroot}/%{_sysconfdir}/%{name}/Catalina/localhost
-mv %{buildroot}/%{tomcat_home}/conf/* %{buildroot}/%{_sysconfdir}/%{name}/
-rmdir %{buildroot}/%{tomcat_home}/conf
-cd %{buildroot}/%{tomcat_home}/
-ln -s %{_sysconfdir}/%{name} conf
-cd -
-
-# Put webapps in /var/lib and link back.
-install -d -m 755 %{buildroot}/var/lib/%{name}
-mv %{buildroot}/%{tomcat_home}/webapps %{buildroot}/var/lib/%{name}
-cd %{buildroot}/%{tomcat_home}/
-ln -s /var/lib/%{name}/webapps webapps
-cd -
-
-# Put lib in /usr/share/java and link back.
-install -d -m 755 %{buildroot}/usr/share/java
-mv %{buildroot}/%{tomcat_home}/lib %{buildroot}/usr/share/java/%{name}
-cd %{buildroot}/%{tomcat_home}/
-ln -s /usr/share/java/%{name} lib
-cd -
-
-# Put docs in /usr/share/doc
-install -d -m 755 %{buildroot}/usr/share/doc/%{name}-%{version}
-mv %{buildroot}/%{tomcat_home}/{RUNNING.txt,LICENSE,NOTICE,RELEASE*} %{buildroot}/usr/share/doc/%{name}-%{version}
-
-# Put executables in /usr/bin
-rm  %{buildroot}/%{tomcat_home}/bin/*bat
-install -d -m 755 %{buildroot}/usr/{bin,sbin}
-mv %{buildroot}/%{tomcat_home}/bin/digest.sh %{buildroot}/usr/bin/%{name}-digest
-mv %{buildroot}/%{tomcat_home}/bin/tool-wrapper.sh %{buildroot}/usr/bin/%{name}-tool-wrapper
-
 # Drop init script
-install -d -m 755 %{buildroot}/%{_initrddir}
-install    -m 755 %_sourcedir/%{name}.init %{buildroot}/%{_initrddir}/%{name}
-
-# Drop sysconfig script
-install -d -m 755 %{buildroot}/%{_sysconfdir}/sysconfig/
-install    -m 644 %_sourcedir/%{name}.sysconfig %{buildroot}/%{_sysconfdir}/sysconfig/%{name}
-
-# Drop logrotate script
-install -d -m 755 %{buildroot}/%{_sysconfdir}/logrotate.d
-install    -m 644 %_sourcedir/%{name}.logrotate %{buildroot}/%{_sysconfdir}/logrotate.d/%{name}
+install -d -m 755 %{buildroot}/%{_initddir}
+install    -m 755 %_sourcedir/%{name}.init %{buildroot}/%{_initddir}/%{name}
 
 %clean
 rm -rf %{buildroot}
@@ -168,39 +107,11 @@ getent passwd %{tomcat_user} >/dev/null || /usr/sbin/useradd --comment "Tomcat D
 
 %files
 %defattr(-,%{tomcat_user},%{tomcat_group})
-/var/log/%{name}/
-/var/cache/%{name}
-%dir /var/lib/%{name}/webapps
+%{tomcat_home}/
+%defattr(0755,%{tomcat_user},%{tomcat_group}) 
+%{tomcat_home}/bin/
 %defattr(-,root,root)
-%{tomcat_home}/*
-%attr(0755,root,root) /usr/bin/*
-%dir /var/lib/%{name}
-%{_initrddir}/%{name}
-%{_sysconfdir}/logrotate.d/%{name}
-%config(noreplace) %{_sysconfdir}/sysconfig/%{name}
-%config(noreplace) %{_sysconfdir}/%{name}
-%doc /usr/share/doc/%{name}-%{version}
-
-%files lib
-%defattr(0644,root,root,0755)
-/usr/share/java/%{name}
-
-%files admin-webapps
-%defattr(0644,root,root,0755)
-/var/lib/%{name}/webapps/host-manager
-/var/lib/%{name}/webapps/manager
-
-%files docs-webapp
-%defattr(0644,root,root,0755)
-/var/lib/%{name}/webapps/docs
-
-%files examples-webapp
-%defattr(0644,root,root,0755)
-/var/lib/%{name}/webapps/examples
-
-%files root-webapp
-%defattr(0644,root,root,0755)
-/var/lib/%{name}/webapps/ROOT
+%{_initddir}/%{name}
 
 %post
 chkconfig --add %{name}
@@ -217,6 +128,10 @@ if [ $1 -ge 1 ]; then
 fi
 
 %changelog
+* Mon Feb 15 2021 Jamie Coker <jamie.coker@sap.com>
+- 8.5.63
+- Reworked spec file and removed unneeded stuff
+- Removed .sysconfig and .logrotate files 
 * Tue Jun 25 2019 José María Fernández <jose.m.fernandez@bsc.es>
 - 8.5.42
 * Sat May 25 2019 José María Fernández <jose.m.fernandez@bsc.es>
