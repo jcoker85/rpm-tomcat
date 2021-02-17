@@ -8,7 +8,7 @@ Steps to build them:
 ```bash
 sudo yum -y install rpmdevtools git
 
-git clone -b tomcat8 https://github.com/inab/rpm-tomcat.git
+git clone -b tomcat8 https://github.com/jcoker85/rpm-tomcat.git
 
 cd rpm-tomcat
 ./rpm-generator.sh
