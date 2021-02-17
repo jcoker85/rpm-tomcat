@@ -27,7 +27,6 @@ Source0:    apache-tomcat-%{version}.tar.gz
 Source1:    %{name}.init
 Source2:    %{name}.sysconfig
 Source3:    %{name}.logrotate
-Requires:   java, %{name}-lib = %{version}-%{release}
 BuildRoot:  %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
@@ -108,8 +107,6 @@ getent passwd %{tomcat_user} >/dev/null || /usr/sbin/useradd --comment "Tomcat D
 %files
 %defattr(-,%{tomcat_user},%{tomcat_group})
 %{tomcat_home}/
-%defattr(0755,%{tomcat_user},%{tomcat_group}) 
-%{tomcat_home}/bin/
 %defattr(-,root,root)
 %{_initddir}/%{name}
 
