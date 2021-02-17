@@ -5,10 +5,10 @@
 %define tomcat_user callidus
 
 Summary:    Apache Servlet/JSP Engine, RI for Servlet 3.1/JSP 2.3 API
-Name:       tomcat
+Name:       calliduscloud-pmpro-tomcat-package-8.5.63
 Version:    8.5.63
-BuildArch:  noarch
 Release:    1.0
+BuildArch:  noarch
 License:    Apache Software License
 Group:      Networking/Daemons
 URL:        https://tomcat.apache.org/
@@ -21,11 +21,11 @@ Apache Tomcat 8.5.63 Archive Installer
 %install
 install -d %{buildroot}/%{tomcat_home}/
 cp -R * %{buildroot}/%{tomcat_home}/
-cp -R %{buildroot}/%{tomcat_home}/apache-%{name}-%{version}/* %{buildroot}/%{tomcat_home}/
+cp -R %{buildroot}/%{tomcat_home}/apache-tomcat-%{version}/* %{buildroot}/%{tomcat_home}/
 
 %files
 %defattr(-,%{tomcat_user},%{tomcat_group},-)
-%exclude %{tomcat_home}/apache-%{name}-%{version}/
+%exclude %{tomcat_home}/apache-tomcat-%{version}/
 %exclude %{tomcat_home}/webapps/*
 %{apps_home}/
 
