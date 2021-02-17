@@ -1,6 +1,5 @@
 %define apps_home /apps
 %define tomcat_home /apps/tomcat
-%define temp_home /tmp/tomcat
 %define tomcat_group callidus
 %define tomcat_user callidus
 
@@ -13,7 +12,6 @@ License:    Apache Software License
 Group:      Networking/Daemons
 URL:        https://tomcat.apache.org/
 Source0:    apache-%{name}-%{version}.tar.gz
-BuildRoot:  %{temp_home}
 
 %description
 Apache Tomcat 8.5.63 Archive Installer
